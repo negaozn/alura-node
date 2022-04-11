@@ -1,14 +1,17 @@
 import chalk from 'chalk'
 import fs from 'fs'
 
-function lerArquivo(path){
+async function lerArquivo(path){
     const encoding = 'utf-8'
-    fs.readFile(path,encoding,function(err,data){
-        if (err){
-            console.log(chalk.red('Algo deu errado: ', err))
-        }
-        console.log(chalk.green(data))
-    })
+    try{
+        const file = await fs.promises.readFile(path,encoding)
+        console.log(chalk.green(file))    
+    }
+    catch (err)
+    {
+        console.log(chalk.red(err))
+    }
+
 }
 
 /*function texto(string) {
